@@ -7,16 +7,19 @@ import Skeleton from "../UI/Skeleton";
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     async function getHotCollections() {
       try {
+        setHasError(false);
         const response = await axios.get(
           "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
         );
         setCollections(response.data);
       } catch (error) {
         console.error("Failed to load hot collections:", error);
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -25,7 +28,8 @@ const HotCollections = () => {
     getHotCollections();
   }, []);
 
-  const visibleCollections = isLoading ? new Array(6).fill(null) : collections;
+  const visibleCollections =
+    isLoading || hasError ? new Array(6).fill(null) : collections;
 
   const settings = {
     dots: false,

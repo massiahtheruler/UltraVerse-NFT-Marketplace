@@ -25,6 +25,7 @@
   border-radius: 50%;
   background: #ffffff;
   box-shadow: none;
+  transform: translateY(-50%);
   transition:
     box-shadow 200ms ease,
     transform 200ms ease;
