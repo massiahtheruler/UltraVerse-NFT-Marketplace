@@ -29,11 +29,11 @@ const TopSellers = () => {
   const visibleSellers =
     isLoading || hasError ? new Array(12).fill(null) : sellers;
   return (
-    <section id="section-popular" className="pb-5">
+    <section id="section-popular" className="pb-5" data-aos="fade-up">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
-            <div className="text-center">
+          <div className="col-lg-12" data-aos="fade-up">
+            <div className="text-center" data-aos="fade-up">
               <h2>Top Sellers</h2>
               <div className="small-border bg-color-2"></div>
             </div>
@@ -41,7 +41,7 @@ const TopSellers = () => {
           <div className="col-md-12">
             <ol className="author_list">
               {visibleSellers.map((seller, index) => (
-                <li key={seller?.id || index}>
+                <li key={seller?.id || index} data-aos="fade-up">
                   <div className="author_list_pp">
                     {seller ? (
                       <Link to={`/author/${seller.authorId}`}>

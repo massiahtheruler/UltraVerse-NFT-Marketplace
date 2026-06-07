@@ -102,7 +102,7 @@ const ExploreItems = () => {
 
   return (
     <>
-      <div>
+      <div data-aos="fade-up">
         <select
           id="filter-items"
           value={selectedFilter}
@@ -123,8 +123,9 @@ const ExploreItems = () => {
           <div
             key={exploreItem?.id || index}
             className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+            data-aos="fade-up"
           >
-            <div className="nft__item">
+            <div className="nft__item" data-aos="fade-up">
               <div className="author_list_pp">
                 {exploreItem ? (
                   <Link
@@ -199,7 +200,7 @@ const ExploreItems = () => {
         );
       })}
       {!hasError && sortedExploreItems.length > INITIAL_VISIBLE_ITEMS && (
-        <div className="col-md-12 text-center">
+        <div className="col-md-12 text-center" data-aos="fade-up">
           <button
             id="loadmore"
             className="btn-main lead"

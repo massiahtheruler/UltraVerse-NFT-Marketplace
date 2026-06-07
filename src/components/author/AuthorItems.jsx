@@ -64,8 +64,9 @@ const AuthorItems = () => {
             <div
               key={authorItem?.id || index}
               className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+              data-aos="fade-up"
             >
-              <div className="nft__item">
+              <div className="nft__item" data-aos="fade-up">
                 <div className="author_list_pp">
                   {authorItem ? (
                     <Link

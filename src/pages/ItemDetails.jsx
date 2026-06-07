@@ -55,10 +55,10 @@ const ItemDetails = () => {
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
-        <section aria-label="section" className="mt90 sm-mt-0">
+        <section aria-label="section" className="mt90 sm-mt-0" data-aos="fade-up">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 text-center">
+              <div className="col-md-6 text-center" data-aos="fade-up">
                 {isLoading ? (
                   <Skeleton width="100%" height="620px" borderRadius="8px" />
                 ) : (
@@ -69,8 +69,8 @@ const ItemDetails = () => {
                   />
                 )}
               </div>
-              <div className="col-md-6">
-                <div className="item_info">
+              <div className="col-md-6" data-aos="fade-up">
+                <div className="item_info" data-aos="fade-up">
                   {hasError && (
                     <p>We couldn&apos;t load this item right now.</p>
                   )}
