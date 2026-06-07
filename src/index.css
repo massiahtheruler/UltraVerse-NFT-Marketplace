@@ -13,8 +13,10 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
-.slick-prev,
-.slick-next {
+#section-collections .slick-prev,
+#section-collections .slick-next,
+#section-items .slick-prev,
+#section-items .slick-next {
   width: 54px;
   height: 54px;
   display: flex !important;
@@ -31,16 +33,20 @@
     transform 200ms ease;
 }
 
-.slick-prev {
+#section-collections .slick-prev,
+#section-items .slick-prev {
   left: -18px;
 }
 
-.slick-next {
+#section-collections .slick-next,
+#section-items .slick-next {
   right: -18px;
 }
 
-.slick-prev:before,
-.slick-next:before {
+#section-collections .slick-prev:before,
+#section-collections .slick-next:before,
+#section-items .slick-prev:before,
+#section-items .slick-next:before {
   font-family: Arial, sans-serif;
   font-weight: 700;
   color: #111111;
@@ -53,24 +59,30 @@
   transform: translateY(-2px);
 }
 
-.slick-prev:before {
+#section-collections .slick-prev:before,
+#section-items .slick-prev:before {
   content: "‹";
 }
 
-.slick-next:before {
+#section-collections .slick-next:before,
+#section-items .slick-next:before {
   content: "›";
 }
 
-.slick-prev:hover,
-.slick-next:hover {
+#section-collections .slick-prev:hover,
+#section-collections .slick-next:hover,
+#section-items .slick-prev:hover,
+#section-items .slick-next:hover {
   background: #ffffff;
   border-color: #c7c7d1;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
   transform: translateY(-50%) scale(1.04);
 }
 
-.slick-prev:hover:before,
-.slick-next:hover:before {
+#section-collections .slick-prev:hover:before,
+#section-collections .slick-next:hover:before,
+#section-items .slick-prev:hover:before,
+#section-items .slick-next:hover:before {
   color: #111111;
   background: none;
 }
