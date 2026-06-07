@@ -3,8 +3,11 @@ import axios from "axios";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import AuthorImage from "../images/author_thumbnail.jpg";
+import { useParams } from "react-router-dom";
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
+  const { authorId = "73855012" } = useParams();
   const [authorProfile, setAuthorProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -13,8 +16,9 @@ const Author = () => {
   useEffect(() => {
     async function getAuthorProfile() {
       try {
+        setIsLoading(true);
         const response = await axios.get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012",
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
         );
         setAuthorProfile(response.data);
         setFollowerCount(response.data?.followers ?? 0);
@@ -26,7 +30,7 @@ const Author = () => {
     }
 
     getAuthorProfile();
-  }, []);
+  }, [authorId]);
 
   const handleFollowToggle = () => {
     setIsFollowing((currentIsFollowing) => {
@@ -64,16 +68,47 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={displayImage} alt={displayName} />
-
-                      <i className="fa fa-check"></i>
+                      {isLoading ? (
+                        <Skeleton width="150px" height="150px" borderRadius="75px" />
+                      ) : (
+                        <>
+                          <img src={displayImage} alt={displayName} />
+                          <i className="fa fa-check"></i>
+                        </>
+                      )}
                       <div className="profile_name">
                         <h4>
-                          {displayName}
-                          <span className="profile_username">{displayTag}</span>
-                          <span id="wallet" className="profile_wallet">
-                            {displayWallet}
-                          </span>
+                          {isLoading ? (
+                            <>
+                              <Skeleton
+                                width="220px"
+                                height="32px"
+                                borderRadius="4px"
+                              />
+                              <div style={{ marginTop: "8px" }}>
+                                <Skeleton
+                                  width="120px"
+                                  height="20px"
+                                  borderRadius="4px"
+                                />
+                              </div>
+                              <div style={{ marginTop: "8px" }}>
+                                <Skeleton
+                                  width="340px"
+                                  height="18px"
+                                  borderRadius="4px"
+                                />
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {displayName}
+                              <span className="profile_username">{displayTag}</span>
+                              <span id="wallet" className="profile_wallet">
+                                {displayWallet}
+                              </span>
+                            </>
+                          )}
                           <button id="btn_copy" title="Copy Text">
                             Copy
                           </button>
@@ -84,7 +119,15 @@ const Author = () => {
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
                       <div className="profile_follower">
-                        {isLoading ? "Loading followers..." : `${followerCount} followers`}
+                        {isLoading ? (
+                          <Skeleton
+                            width="140px"
+                            height="20px"
+                            borderRadius="4px"
+                          />
+                        ) : (
+                          `${followerCount} followers`
+                        )}
                       </div>
                       <button
                         type="button"
