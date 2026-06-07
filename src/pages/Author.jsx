@@ -57,15 +57,16 @@ const Author = () => {
           id="profile_banner"
           aria-label="section"
           className="text-light"
+          data-aos="fade-up"
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
 
-        <section aria-label="section">
+        <section aria-label="section" data-aos="fade-up">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="d_profile de-flex">
+                <div className="d_profile de-flex" data-aos="fade-up">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
                       {isLoading ? (
@@ -143,7 +144,7 @@ const Author = () => {
               </div>
 
               <div className="col-md-12">
-                <div className="de_tab tab_simple">
+                <div className="de_tab tab_simple" data-aos="fade-up">
                   <AuthorItems />
                 </div>
               </div>

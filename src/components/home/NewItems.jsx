@@ -90,11 +90,11 @@ const NewItems = () => {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom" data-aos="fade-up">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
-            <div className="text-center">
+          <div className="col-lg-12" data-aos="fade-up">
+            <div className="text-center" data-aos="fade-up">
               <h2>New Items</h2>
               <div className="small-border bg-color-2"></div>
             </div>
@@ -121,8 +121,8 @@ const NewItems = () => {
                     : null;
 
                   return (
-                    <div key={item?.id || index} className="px-2">
-                      <div className="nft__item">
+                    <div key={item?.id || index} className="px-2" data-aos="fade-up">
+                      <div className="nft__item" data-aos="fade-up">
                         <div className="author_list_pp">
                           {item ? (
                             <Link
