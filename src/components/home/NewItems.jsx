@@ -126,7 +126,7 @@ const NewItems = () => {
                         <div className="author_list_pp">
                           {item ? (
                             <Link
-                              to="/author"
+                              to={`/author/${item.authorId}`}
                               data-bs-toggle="tooltip"
                               data-bs-placement="top"
                               title={`Creator ID: ${item.authorId}`}
@@ -166,7 +166,7 @@ const NewItems = () => {
                           </div>
 
                           {item ? (
-                            <Link to="/item-details">
+                            <Link to={`/item-details/${item.nftId}`}>
                               <img
                                 src={item.nftImage}
                                 className="lazy nft__item_preview"
@@ -184,7 +184,7 @@ const NewItems = () => {
                         <div className="nft__item_info">
                           {item ? (
                             <>
-                              <Link to="/item-details">
+                              <Link to={`/item-details/${item.nftId}`}>
                                 <h4>{item.title}</h4>
                               </Link>
                               <div className="nft__item_price">

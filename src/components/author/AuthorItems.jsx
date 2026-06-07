@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
 
 const AuthorItems = () => {
+  const { authorId = "73855012" } = useParams();
   const [authorItems, setAuthorItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -13,7 +15,7 @@ const AuthorItems = () => {
       try {
         setHasError(false);
         const response = await axios.get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012",
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
         );
         const authorData = response.data;
         const collection = Array.isArray(authorData?.nftCollection)
@@ -35,7 +37,7 @@ const AuthorItems = () => {
     }
 
     getAuthorItems();
-  }, []);
+  }, [authorId]);
 
   const visibleAuthorItems =
     isLoading || hasError ? new Array(8).fill(null) : authorItems;
@@ -67,10 +69,10 @@ const AuthorItems = () => {
                 <div className="author_list_pp">
                   {authorItem ? (
                     <Link
-                      to="/author"
+                      to={`/author/${authorItem.authorId}`}
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title={`Creator ID: ${authorItem.authorName}`}
+                      title={`Creator ID: ${authorItem.authorId}`}
                     >
                       <img
                         className="lazy"
@@ -94,7 +96,7 @@ const AuthorItems = () => {
                   <div className="nft__item_extra"></div>
 
                   {authorItem ? (
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${authorItem.nftId}`}>
                       <img
                         src={authorItem.nftImage}
                         className="lazy nft__item_preview"
@@ -108,7 +110,7 @@ const AuthorItems = () => {
                 <div className="nft__item_info">
                   {authorItem ? (
                     <>
-                      <Link to="/item-details">
+                      <Link to={`/item-details/${authorItem.nftId}`}>
                         <h4>{authorItem.title}</h4>
                       </Link>
                       <div className="nft__item_price">

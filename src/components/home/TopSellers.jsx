@@ -44,7 +44,7 @@ const TopSellers = () => {
                 <li key={seller?.id || index}>
                   <div className="author_list_pp">
                     {seller ? (
-                      <Link to="/author">
+                      <Link to={`/author/${seller.authorId}`}>
                         <img
                           className="lazy pp-author"
                           src={seller.authorImage}
@@ -59,7 +59,9 @@ const TopSellers = () => {
                   <div className="author_list_info">
                     {seller ? (
                       <>
-                        <Link to="/author">{seller.authorName}</Link>
+                        <Link to={`/author/${seller.authorId}`}>
+                          {seller.authorName}
+                        </Link>
                         <span>{seller.price} ETH</span>
                       </>
                     ) : (
