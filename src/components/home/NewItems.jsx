@@ -37,7 +37,7 @@ const NewItems = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const visibleItems = isLoading || hasError ? new Array(6).fill(null) : items;
+  const visibleItems = isLoading ? new Array(6).fill(null) : items;
 
   const settings = {
     dots: false,
@@ -74,7 +74,10 @@ const NewItems = () => {
   const formatCountdown = (expiryDate) => {
     if (!expiryDate) return null;
 
-    const totalSeconds = Math.floor((Number(expiryDate) - currentTime) / 1000);
+    const expiryMs = Number(expiryDate);
+    if (Number.isNaN(expiryMs)) return null;
+
+    const totalSeconds = Math.floor((expiryMs - currentTime) / 1000);
 
     if (totalSeconds <= 0) {
       return "EXPIRED";
@@ -97,109 +100,124 @@ const NewItems = () => {
             </div>
           </div>
           <div className="col-lg-12">
-            <Slider {...settings}>
-              {visibleItems.map((item, index) => {
-                const countdownText = item
-                  ? formatCountdown(item.expiryDate)
-                  : null;
+            {hasError && (
+              <p className="text-center">
+                We couldn&apos;t load new items right now. Please try again
+                later.
+              </p>
+            )}
 
-                return (
-                  <div key={item?.id || index} className="px-2">
-                    <div className="nft__item">
-                      <div className="author_list_pp">
-                        {item ? (
-                          <Link
-                            to="/author"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Creator: Monica Lucas"
-                          >
-                            <img
-                              className="lazy"
-                              src={item.authorImage}
-                              alt={item.title}
-                            />
-                            <i className="fa fa-check"></i>
-                          </Link>
-                        ) : (
-                          <Skeleton
-                            width="50px"
-                            height="50px"
-                            borderRadius="50%"
-                          />
-                        )}
-                      </div>
-                      {countdownText && (
-                        <div className="de_countdown">{countdownText}</div>
-                      )}
+            {!isLoading && !hasError && items.length === 0 && (
+              <p className="text-center">
+                No new items are available at the moment. Check back soon.
+              </p>
+            )}
 
-                      {!item && (
-                        <div className="de_countdown">
-                          <Skeleton
-                            width="70px"
-                            height="16px"
-                            borderRadius="12px"
-                          />
-                        </div>
-                      )}
+            {!hasError && (isLoading || items.length > 0) && (
+              <Slider {...settings}>
+                {visibleItems.map((item, index) => {
+                  const countdownText = item
+                    ? formatCountdown(item.expiryDate)
+                    : null;
 
-                      <div className="nft__item_wrap">
-                        <div className="nft__item_extra">
-                          {/* keep your buttons/share here */}
-                        </div>
-
-                        {item ? (
-                          <Link to="/item-details">
-                            <img
-                              src={item.nftImage}
-                              className="lazy nft__item_preview"
-                              alt={item.title}
-                            />
-                          </Link>
-                        ) : (
-                          <Skeleton
-                            width="100%"
-                            height="230px"
-                            borderRadius="8px"
-                          />
-                        )}
-                      </div>
-                      <div className="nft__item_info">
-                        {item ? (
-                          <>
-                            <Link to="/item-details">
-                              <h4>{item.title}</h4>
+                  return (
+                    <div key={item?.id || index} className="px-2">
+                      <div className="nft__item">
+                        <div className="author_list_pp">
+                          {item ? (
+                            <Link
+                              to="/author"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title={`Creator ID: ${item.authorId}`}
+                            >
+                              <img
+                                className="lazy"
+                                src={item.authorImage}
+                                alt={item.title}
+                              />
+                              <i className="fa fa-check"></i>
                             </Link>
-                            <div className="nft__item_price">
-                              {item.price} ETH
-                            </div>
-                            <div className="nft__item_like">
-                              <i className="fa fa-heart"></i>
-                              <span>{item.likes}</span>
-                            </div>
-                          </>
-                        ) : (
-                          <>
+                          ) : (
                             <Skeleton
-                              width="55%"
-                              height="18px"
-                              borderRadius="4px"
+                              width="50px"
+                              height="50px"
+                              borderRadius="50%"
                             />
-                            <div style={{ marginTop: "10px" }}>
+                          )}
+                        </div>
+                        {countdownText && (
+                          <div className="de_countdown">{countdownText}</div>
+                        )}
+
+                        {!item && (
+                          <div className="de_countdown">
+                            <Skeleton
+                              width="70px"
+                              height="16px"
+                              borderRadius="12px"
+                            />
+                          </div>
+                        )}
+
+                        <div className="nft__item_wrap">
+                          <div className="nft__item_extra">
+                            {/* keep your buttons/share here */}
+                          </div>
+
+                          {item ? (
+                            <Link to="/item-details">
+                              <img
+                                src={item.nftImage}
+                                className="lazy nft__item_preview"
+                                alt={item.title}
+                              />
+                            </Link>
+                          ) : (
+                            <Skeleton
+                              width="100%"
+                              height="230px"
+                              borderRadius="8px"
+                            />
+                          )}
+                        </div>
+                        <div className="nft__item_info">
+                          {item ? (
+                            <>
+                              <Link to="/item-details">
+                                <h4>{item.title}</h4>
+                              </Link>
+                              <div className="nft__item_price">
+                                {item.price} ETH
+                              </div>
+                              <div className="nft__item_like">
+                                <i className="fa fa-heart"></i>
+                                <span>{item.likes}</span>
+                              </div>
+                            </>
+                          ) : (
+                            <>
                               <Skeleton
-                                width="35%"
-                                height="16px"
+                                width="55%"
+                                height="18px"
                                 borderRadius="4px"
                               />
-                            </div>
-                          </>
-                        )}
+                              <div style={{ marginTop: "10px" }}>
+                                <Skeleton
+                                  width="35%"
+                                  height="16px"
+                                  borderRadius="4px"
+                                />
+                              </div>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </Slider>
+                  );
+                })}
+              </Slider>
+            )}
           </div>
         </div>
       </div>
