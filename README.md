@@ -10,6 +10,16 @@ Live Demo
 
 [live Demo - internship-flax-five.vercel.app](https://internship-flax-five.vercel.app/)
 
+Project Preview
+
+These previews highlight the marketplace interface, the API-driven listing experience, and the kind of motion and browsing flow users see across the app.
+
+![Ultraverse hero screen](docs/screenshots/ultraverse-hero.png)
+
+![Ultraverse new items section](docs/screenshots/ultraverse-new-items.png)
+
+![Ultraverse marketplace demo](docs/screenshots/ultraverse-demo.gif)
+
 ⸻
 
 Key Features
