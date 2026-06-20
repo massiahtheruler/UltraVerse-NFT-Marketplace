@@ -8,7 +8,7 @@ The primary focus of this project was frontend engineering. I spent most of my t
 
 Live Demo
 
-[live Demo - internship-flax-five.vercel.app/](https://internship-flax-five.vercel.app/)
+[live Demo - internship-flax-five.vercel.app](https://internship-flax-five.vercel.app/)
 
 ⸻
 
